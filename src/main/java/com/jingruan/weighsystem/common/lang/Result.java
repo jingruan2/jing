@@ -14,7 +14,7 @@ import java.io.Serializable;
 
         public static Result success(Object data){
 
-            return Result.success(200,"操作成功",data);
+            return Result.success(200,"成功",data);
         }
         public static Result success(int code,String msg,Object data){
             Result r = new Result();

@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author sfweight
- * @since 2020-12-30
+ * @since 2021-01-04
  */
 public interface TNoteMapper extends BaseMapper<TNote> {
 

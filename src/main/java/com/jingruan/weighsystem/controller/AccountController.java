@@ -5,6 +5,7 @@ import cn.hutool.core.map.MapUtil;
 import cn.hutool.crypto.SecureUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.jingruan.weighsystem.common.dto.LoginDto;
+import com.jingruan.weighsystem.common.dto.Token;
 import com.jingruan.weighsystem.common.lang.Result;
 import com.jingruan.weighsystem.entity.TUser;
 import com.jingruan.weighsystem.service.TUserService;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.crypto.Data;
+import java.util.Date;
 
 @RestController
 public class AccountController {
@@ -29,20 +32,33 @@ public class AccountController {
     JwtUtils jwtUtils;
 
     @PostMapping("login")
-    public Result login(@Validated @RequestBody LoginDto loginDto, HttpServletResponse response){
-        TUser user = userService.getOne(new QueryWrapper<TUser>().eq("F_Name",loginDto.getUsername()));
-        Assert.notNull(user,"用户不存在");
-        if(!user.getFPass().equals(SecureUtil.md5(loginDto.getPassword())) ){
-            return Result.fail("密码不正确");
+    public Result login(@Validated @RequestBody LoginDto loginDto,@Validated @RequestBody  Token token){
+        TUser user = userService.getOne(new QueryWrapper<TUser>().eq("username",loginDto.getUsername()));
+        Assert.notNull(user,"用户名密码错误");
+        if(!user.getPass().equals(loginDto.getPass())){
+            return Result.fail(300,"用户名密码错误",null);
         }
-        String jwt = jwtUtils.generateToken(user.getFId());
-        response.setHeader("Authorizaion",jwt);
-        response.setHeader("Access-control-Expost-Headers","Authorizaion");
+        if(!user.getDepart().equals(loginDto.getDepart())){
+            return Result.fail("部门错误");
+        }
+
+        //获取长短token
+        String accessToken = jwtUtils.getshort(user.getId());
+        String refreshToken = jwtUtils.getlong(user.getId());
+
+        TUser user1=new TUser();
+
+        user1.setUsername(user.getUsername());
+        user1.setDepart(user.getDepart());
+        user1.setTime(user.getTime());
+        user1.setTrueName(user.getTrueName());
+        user1.setId(user.getId());
+
 
         return Result.success(MapUtil.builder()
-                .put("id",user.getFId())
-                .put("username",user.getFName())
-                .put("truename",user.getFTruename())
+                .put("userInfo",user1)
+                .put("accessToken",accessToken)
+                .put("refreshToken",refreshToken)
                 .map()
         );
     }

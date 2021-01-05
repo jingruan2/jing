@@ -1,8 +1,8 @@
 package com.jingruan.weighsystem.service.impl;
 
-import com.jingruan.weighsystem.entity.TNote;
-import com.jingruan.weighsystem.mapper.TNoteMapper;
-import com.jingruan.weighsystem.service.TNoteService;
+import com.jingruan.weighsystem.entity.TDept;
+import com.jingruan.weighsystem.mapper.TDeptMapper;
+import com.jingruan.weighsystem.service.TDeptService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +15,6 @@ import org.springframework.stereotype.Service;
  * @since 2021-01-04
  */
 @Service
-public class TNoteServiceImpl extends ServiceImpl<TNoteMapper, TNote> implements TNoteService {
+public class TDeptServiceImpl extends ServiceImpl<TDeptMapper, TDept> implements TDeptService {
 
 }

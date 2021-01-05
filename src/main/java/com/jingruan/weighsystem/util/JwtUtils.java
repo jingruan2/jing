@@ -11,14 +11,27 @@ import java.util.Date;
 //@ConfigurationProperties(prefix = "jwt2")
 public class JwtUtils {
     private String secret ="f4e2e52034348f86b67cde581c0f9eb5";
-    private long expire = 604800L;
+    private long shorttime = 3600L;
+    private long longtime = 3600*24*7L;
     private String header;
     /**
      * 生成jwt tokenliu
      */
-    public String generateToken(long userId) {
+    public String getshort(long userId) {
         Date nowDate = new Date();
-        Date expireDate = new Date(nowDate.getTime()+expire*1000);
+        Date expireDate = new Date(nowDate.getTime()+shorttime*1000);
+        return Jwts.builder()
+                .setHeaderParam("typ","JWT")
+                .setSubject(userId+"")
+                .setIssuedAt(nowDate)
+                .setExpiration(expireDate)
+                .signWith(SignatureAlgorithm.HS512,secret)
+                .compact();
+    }
+
+    public String getlong(long userId) {
+        Date nowDate = new Date();
+        Date expireDate = new Date(nowDate.getTime()+longtime*1000);
         return Jwts.builder()
                 .setHeaderParam("typ","JWT")
                 .setSubject(userId+"")

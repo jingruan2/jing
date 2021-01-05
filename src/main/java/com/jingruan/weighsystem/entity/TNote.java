@@ -1,5 +1,6 @@
 package com.jingruan.weighsystem.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
@@ -13,7 +14,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author sfweight
- * @since 2020-12-30
+ * @since 2021-01-04
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -22,29 +23,26 @@ public class TNote implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId("F_ID")
-    private Integer fId;
+    @TableId(value = "id", type = IdType.AUTO)
+    private Integer id;
 
-    @TableField("F_OpMan")
-    private String fOpman;
+    @TableField("OpMan")
+    private String OpMan;
 
-    @TableField("F_Type")
-    private String fType;
+    private String type;
 
-    @TableField("F_Text")
-    private String fText;
+    private String text;
 
-    @TableField("F_DateTime")
-    private String fDatetime;
+    @TableField("dateTime")
+    private String dateTime;
 
-    @TableField("F_Depart")
-    private String fDepart;
+    private String depart;
 
-    @TableField("F_EText")
-    private String fEtext;
+    @TableField("eText")
+    private String eText;
 
-    @TableField("F_ETime")
-    private String fEtime;
+    @TableField("eTime")
+    private String eTime;
 
 
 }

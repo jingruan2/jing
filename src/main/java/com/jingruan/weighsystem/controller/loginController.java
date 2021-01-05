@@ -2,6 +2,7 @@ package com.jingruan.weighsystem.controller;
 
 import com.jingruan.weighsystem.util.CreateJwt;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -12,7 +13,7 @@ import java.util.Map;
 @Controller
 public class loginController {
     @ResponseBody
-    @PostMapping("login/getToken")
+    @GetMapping("login/getToken")
     public Map<String,Object> getToken(String username, String password, String depart){
         Map<String,Object> m1 = new HashMap<>();
         Map<String,Object> m2 = new HashMap<>();

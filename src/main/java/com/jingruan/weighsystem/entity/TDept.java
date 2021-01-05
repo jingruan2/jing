@@ -1,8 +1,8 @@
 package com.jingruan.weighsystem.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import java.time.LocalDate;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -19,27 +19,16 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class TUser implements Serializable {
+public class TDept implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    private String username;
+    private String dept;
 
-    private String pass;
-
-    @TableField("trueName")
-    private String trueName;
-
-    private String rights;
-
-    private String time;
-
-    private String depart;
-
-    private String memo;
+    private LocalDate createtime;
 
 
 }
