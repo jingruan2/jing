@@ -5,7 +5,6 @@ import cn.hutool.core.map.MapUtil;
 import cn.hutool.crypto.SecureUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.jingruan.weighsystem.common.dto.LoginDto;
-import com.jingruan.weighsystem.common.dto.Token;
 import com.jingruan.weighsystem.common.lang.Result;
 import com.jingruan.weighsystem.entity.TUser;
 import com.jingruan.weighsystem.service.TUserService;
@@ -32,7 +31,7 @@ public class AccountController {
     JwtUtils jwtUtils;
 
     @PostMapping("login")
-    public Result login(@Validated @RequestBody LoginDto loginDto,@Validated @RequestBody  Token token){
+    public Result login(@Validated @RequestBody LoginDto loginDto){
         TUser user = userService.getOne(new QueryWrapper<TUser>().eq("username",loginDto.getUsername()));
         Assert.notNull(user,"用户名密码错误");
         if(!user.getPass().equals(loginDto.getPass())){
