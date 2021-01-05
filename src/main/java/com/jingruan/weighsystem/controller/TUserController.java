@@ -2,6 +2,8 @@ package com.jingruan.weighsystem.controller;
 
 
 import cn.hutool.core.map.MapUtil;
+import cn.hutool.crypto.SecureUtil;
+import cn.hutool.crypto.digest.MD5;
 import com.jingruan.weighsystem.common.dto.LoginDto;
 import com.jingruan.weighsystem.common.lang.Result;
 import com.jingruan.weighsystem.entity.TUser;
@@ -39,7 +41,7 @@ public class TUserController {
         Date date=new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         tUser.setTime(sdf.format(date));
-
+        tUser.setPass(SecureUtil.md5(tUser.getPass()));
         boolean save = tUserService.save(tUser);
 
         if (save){
