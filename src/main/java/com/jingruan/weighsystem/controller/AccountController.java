@@ -43,7 +43,7 @@ public class AccountController {
 
         //获取长短token
         String accessToken = jwtUtils.getshort(user.getId());
-        String refreshToken = jwtUtils.getlong(user.getId());
+        //String refreshToken = jwtUtils.getlong(user.getId());
 
         TUser user1=new TUser();
 
@@ -57,7 +57,7 @@ public class AccountController {
         return Result.success(MapUtil.builder()
                 .put("userInfo",user1)
                 .put("accessToken",accessToken)
-                .put("refreshToken",refreshToken)
+                //.put("refreshToken",refreshToken)
                 .map()
         );
     }

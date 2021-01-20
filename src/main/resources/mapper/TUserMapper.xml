@@ -2,4 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jingruan.weighsystem.mapper.TUserMapper">
 
+
+    <update id="updatepass">
+        update t_user set pass=#{pass} where id=#{id};
+    </update>
 </mapper>

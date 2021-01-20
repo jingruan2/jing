@@ -55,7 +55,29 @@ public class TUserController {
     }
 
     @RequestMapping("/update")
-    public String saveUser(){
-        return "保存成功";
+    public Result saveUser(String oldPass, @RequestBody TUser tUser){
+        //获取旧密码
+        String oldPass1=tUserService.getById(tUser.getId()).getPass();
+
+        //获取新密码
+        String newPass=SecureUtil.md5(tUser.getPass());
+
+
+        //System.out.println(oldPass1+"   "+oldPass);
+        //判断密码是否一致
+        if (oldPass1.equals(SecureUtil.md5(oldPass))){
+            //修改密码
+
+            tUser.setPass(SecureUtil.md5(tUser.getPass()));
+
+            tUserService.updatepass(tUser);
+
+            return Result.fail(200,"修改成功",null);
+        }
+
+
+        return Result.fail(400,"密码错误",null);
     }
+
+
 }
