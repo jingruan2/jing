@@ -18,7 +18,7 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class TRole implements Serializable {
+public class TAuth implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

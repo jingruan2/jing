@@ -1,6 +1,6 @@
 package com.jingruan.weighsystem.mapper;
 
-import com.jingruan.weighsystem.entity.TRole;
+import com.jingruan.weighsystem.entity.TUserAuth;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.List;
  * @author sfweight
  * @since 2021-02-02
  */
-public interface TRoleMapper extends BaseMapper<TRole> {
+public interface TUserAuthMapper extends BaseMapper<TUserAuth> {
 
-    List<TRole> listByNo(int i);
+    List<TUserAuth> listByUID(int id);
 }

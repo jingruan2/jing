@@ -1,6 +1,6 @@
 package com.jingruan.weighsystem.service;
 
-import com.jingruan.weighsystem.entity.TRole;
+import com.jingruan.weighsystem.entity.TUserAuth;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.List;
  * @author sfweight
  * @since 2021-02-02
  */
-public interface TRoleService extends IService<TRole> {
+public interface TUserAuthService extends IService<TUserAuth> {
 
-    List<TRole> listByNo(int i);
+    List<TUserAuth> listByUID(int id);
 }

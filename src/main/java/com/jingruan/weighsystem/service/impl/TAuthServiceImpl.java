@@ -1,8 +1,8 @@
 package com.jingruan.weighsystem.service.impl;
 
-import com.jingruan.weighsystem.entity.TRole;
-import com.jingruan.weighsystem.mapper.TRoleMapper;
-import com.jingruan.weighsystem.service.TRoleService;
+import com.jingruan.weighsystem.entity.TAuth;
+import com.jingruan.weighsystem.mapper.TAuthMapper;
+import com.jingruan.weighsystem.service.TAuthService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,13 +18,13 @@ import java.util.List;
  * @since 2021-02-02
  */
 @Service
-public class TRoleServiceImpl extends ServiceImpl<TRoleMapper, TRole> implements TRoleService {
+public class TAuthServiceImpl extends ServiceImpl<TAuthMapper, TAuth> implements TAuthService {
 
     @Autowired
-    TRoleMapper tRoleMapper;
+    TAuthMapper tAuthMapper;
 
     @Override
-    public List<TRole> listByNo(int i) {
-        return tRoleMapper.listByNo(i);
+    public List<TAuth> listByNo(int i) {
+        return tAuthMapper.listByNo(i);
     }
 }
