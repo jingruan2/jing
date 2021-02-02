@@ -2,8 +2,49 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jingruan.weighsystem.mapper.TUserMapper">
 
-
+    <!--更新密码-->
     <update id="updatepass">
-        update t_user set pass=#{pass} where id=#{id};
+        update t_user set pass=#{pass} where username=#{username}
+    </update>
+
+    <!--查询次用户的旧密码-->
+    <select id="getByUsername" resultType="com.jingruan.weighsystem.entity.TUser">
+        select pass from t_user where username=#{username}
+    </select>
+
+    <!--查询用户名是否唯一-->
+    <select id="onlyName" resultType="com.jingruan.weighsystem.entity.TUser">
+        select username from t_user where username=#{username}
+    </select>
+
+    <!--分页-->
+    <select id="queryByPtype" resultType="com.jingruan.weighsystem.entity.TUser">
+        select id,username,trueName,memo,time,depart from t_user limit #{pageNo} , #{pageCount}
+    </select>
+
+    <delete id="del">
+        delete from t_user where id =#{ids}
+    </delete>
+
+    <update id="updateByuserId" parameterType="java.lang.Boolean">
+        update t_user
+        <set>
+            <if test="username != null">
+                username = #{username},
+            </if>
+            <if test="pass != null">
+                pass = #{pass},
+            </if>
+            <if test="trueName != null">
+                trueName = #{trueName},
+            </if>
+            <if test="depart != null">
+                depart = #{depart},
+            </if>
+            <if test="memo != null">
+                memo = #{memo},
+            </if>
+        </set>
+        where id = #{id}
     </update>
 </mapper>

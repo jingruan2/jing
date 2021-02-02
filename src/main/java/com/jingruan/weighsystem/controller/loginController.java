@@ -1,33 +1,47 @@
 package com.jingruan.weighsystem.controller;
 
-import com.jingruan.weighsystem.util.CreateJwt;
+import cn.hutool.core.map.MapUtil;
+import cn.hutool.crypto.SecureUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.jingruan.weighsystem.common.dto.LoginDto;
+import com.jingruan.weighsystem.common.lang.Result;
+import com.jingruan.weighsystem.entity.TUser;
+import com.jingruan.weighsystem.service.TUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class loginController {
+
+    @Autowired
+    TUserService userService;
+
+
     @ResponseBody
-    @GetMapping("login/getToken")
-    public Map<String,Object> getToken(String username, String password, String depart){
-        Map<String,Object> m1 = new HashMap<>();
-        Map<String,Object> m2 = new HashMap<>();
-        Date date = new Date();
-        System.out.println(password);
-        String token1 = CreateJwt.getToken(username,date,password);
-        m2.put("leve",1);
-        m2.put("token",token1);
-        m2.put("username",username);
-        m2.put("depart",depart);
-        m2.put("log_time",date.getTime());
-        m2.put("last_login_time",0);
-        m1.put("code",200);
-        m1.put("data",m2);
-        return m1;
+    @RequestMapping("/login")
+    public Result login(@RequestBody LoginDto loginDto){
+
+        TUser user = userService.getOne(new QueryWrapper<TUser>().eq("username",loginDto.getUsername()));
+
+        if(!user.getPass().equals(SecureUtil.md5(loginDto.getPass()))){
+            return Result.fail(300,"用户名密码错误",null);
+        }
+        if(!user.getDepart().equals(loginDto.getDepart())){
+            return Result.fail("部门错误");
+        }
+        TUser user1=new TUser();
+
+        user1.setUsername(user.getUsername());
+        user1.setDepart(user.getDepart());
+        user1.setTime(user.getTime());
+        user1.setTrueName(user.getTrueName());
+        user1.setId(user.getId());
+
+
+        return Result.success(MapUtil.builder()
+                .put("userInfo",user1)
+                .map()
+        );
     }
 }

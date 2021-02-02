@@ -4,8 +4,6 @@ import lombok.Data;
 
 import java.io.Serializable;
 
-
-
     @Data
     public class Result implements Serializable {
         private int code;//200正常，非200异常
