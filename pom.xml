@@ -88,6 +88,18 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.59</version>
         </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+
+
+
+
+
+
+
     </dependencies>
 
     <dependencyManagement>

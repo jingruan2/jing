@@ -4,4 +4,12 @@
     <select id="listByUID" resultType="com.jingruan.weighsystem.entity.TUserAuth">
         select * from t_user_auth where uid=#{id};
     </select>
+
+    <insert id="add">
+        insert into t_user_auth (uid,aid) values (#{uid},#{aid});
+    </insert>
+
+    <delete id="delByUID">
+        delete from t_user_auth where uid=#{id};
+    </delete>
 </mapper>

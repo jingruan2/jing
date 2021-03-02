@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -26,5 +27,15 @@ public class TUserAuthServiceImpl extends ServiceImpl<TUserAuthMapper, TUserAuth
     @Override
     public List<TUserAuth> listByUID(int id) {
         return tUserAuthMapper.listByUID(id);
+    }
+
+    @Override
+    public void add(Map map) {
+        tUserAuthMapper.add(map);
+    }
+
+    @Override
+    public void delByUID(int id) {
+        tUserAuthMapper.delByUID(id);
     }
 }

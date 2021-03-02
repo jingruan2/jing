@@ -4,6 +4,7 @@ import com.jingruan.weighsystem.entity.TUserAuth;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -16,4 +17,8 @@ import java.util.List;
 public interface TUserAuthService extends IService<TUserAuth> {
 
     List<TUserAuth> listByUID(int id);
+
+    void add(Map map);
+
+    void delByUID(int id);
 }
